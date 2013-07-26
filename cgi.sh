@@ -17,7 +17,7 @@
 
 # Parse the query string into an associative array of key=>value pairs
 declare -A _QUERY
-function parse_query() {
+function parse_query {
 	IFS='&'
 	for i in $QUERY_STRING ; do
 		_QUERY[${i%%=*}]=${i##*=}
@@ -26,7 +26,7 @@ function parse_query() {
 }
 
 # Decode a url encoded string
-function url_decode() {
+function url_decode {
 	local __string=$1
 	
 	# Decode spaces
