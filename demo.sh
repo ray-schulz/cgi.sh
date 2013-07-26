@@ -24,25 +24,21 @@
 
 # QUERY_STRING isn't defined, so let's set it to something interesting
 # This would normally be set by the web server
-QUERY_STRING="foo=bar&bohica&sn=afu"
+QUERY_STRING="foo=bar&bohica&sn=afu&q=funky+monkey"
 
 # parse_query will fill the associative array _QUERY with key=>value pairs
 parse_query
 
 # So you can see what happened
 for i in "${!_QUERY[@]}" ; do
-	echo "_QUERY[$i]=${_QUERY[$i]}"
+	echo "_QUERY[$i]: ${_QUERY[$i]}"
 done
 
 # Got some url encoded stuff? Use url_decode to decode it
 # Don't do this to QUERY_STRING, else bad things could happen in parse_query
-url_encoded="that's+my+m%26m!"
-url_decoded=$(url_decode $url_encoded)
-echo "before: $url_encoded"
-echo "after:  $url_decoded"
-
-
-
-
-
-
+original="\"!#\$&'()*+,\\:;=?@[] %-<>\\^\`{|}~"
+echo "original:    $original"
+url_encoded=$(url_encode "$original")
+echo "url encoded: $url_encoded"
+url_decoded=$(url_decode "$original")
+echo "url decoded: $url_decoded"
